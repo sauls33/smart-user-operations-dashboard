@@ -41,3 +41,24 @@
   <p>Loading user stats...</p>
   }
 </section>
+<section class="ai-section">
+  <h2>AI Insights</h2>
+
+  <button (click)="generateAiSummary()" [disabled]="aiLoading()">
+    Generate AI Summary
+  </button>
+
+  @if (aiLoading()) {
+  <p>Generating summary...</p>
+  }
+
+  @if (aiSummary()) {
+  @defer (on idle) {
+  <div class="ai-result">
+    <p>{{ aiSummary() }}</p>
+  </div>
+  } @placeholder {
+  <p>Loading AI insights...</p>
+  }
+  }
+</section>

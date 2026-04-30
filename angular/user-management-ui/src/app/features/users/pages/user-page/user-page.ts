@@ -5,6 +5,7 @@ import { User } from '../../models/user.model';
 import { UserForm } from '../../components/user-form/user-form';
 import { UserList } from '../../components/user-list/user-list';
 import { UserStats } from '../../components/user-stats/user-stats';
+import { AiService } from '../../services/ai.service';
 
 @Component({
   selector: 'app-user-page',
@@ -14,11 +15,15 @@ import { UserStats } from '../../components/user-stats/user-stats';
 })
 export class UserPage implements OnInit {
   private readonly userApiService = inject(UserApiService);
+  private readonly aiService = inject(AiService);
 
   readonly users = signal<User[]>([]);
   readonly selectedUser = signal<User | null>(null);
   readonly loading = signal(false);
   readonly error = signal('');
+
+  readonly aiSummary = signal('');
+  readonly aiLoading = signal(false);
 
   readonly apiUsersUrl = this.userApiService.getApiUrl();
 
@@ -86,6 +91,22 @@ export class UserPage implements OnInit {
     this.userApiService.deleteUser(user.id).subscribe({
       next: () => this.loadUsers(),
       error: () => this.error.set('Could not delete user.')
+    });
+  }
+
+  generateAiSummary(): void {
+    this.aiLoading.set(true);
+    this.aiSummary.set('');
+
+    this.aiService.generateSummary().subscribe({
+      next: (res) => {
+        this.aiSummary.set(res.summary);
+        this.aiLoading.set(false);
+      },
+      error: () => {
+        this.aiSummary.set('Failed to generate AI summary.');
+        this.aiLoading.set(false);
+      }
     });
   }
 }

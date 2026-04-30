@@ -9,3 +9,17 @@ h1 { margin: 0; font-size: clamp(32px, 5vw, 54px); }
 .grid-layout { display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: start; }
 .stats-placeholder { margin-top: 18px; border-radius: 16px; padding: 22px; background: #fff; color: #475569; box-shadow: 0 10px 30px rgba(15, 23, 42, .08); }
 @media (max-width: 920px) { .grid-layout { grid-template-columns: 1fr; } }
+.ai-section {
+  margin-top: 32px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fafafa;
+}
+
+.ai-result {
+  margin-top: 12px;
+  padding: 12px;
+  background: #e6f4ea;
+  border-radius: 8px;
+}
