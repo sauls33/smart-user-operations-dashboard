@@ -5,13 +5,13 @@ import { User } from '../../models/user.model';
 import { UserForm } from '../../components/user-form/user-form';
 import { UserList } from '../../components/user-list/user-list';
 import { UserStats } from '../../components/user-stats/user-stats';
-import { AiService } from '../../services/ai.service';
+import { AiService } from '../../../../core/services/ai.service';
 
 @Component({
   selector: 'app-user-page',
   imports: [UserForm, UserList, UserStats],
   templateUrl: './user-page.html',
-  styleUrl: './user-page.css'
+  styleUrls: ['./user-page.css']
 })
 export class UserPage implements OnInit {
   private readonly userApiService = inject(UserApiService);
@@ -99,7 +99,7 @@ export class UserPage implements OnInit {
     this.aiSummary.set('');
 
     this.aiService.generateSummary().subscribe({
-      next: (res) => {
+      next: (res: { summary: string }) => {
         this.aiSummary.set(res.summary);
         this.aiLoading.set(false);
       },
