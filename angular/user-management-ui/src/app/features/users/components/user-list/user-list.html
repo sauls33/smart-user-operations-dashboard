@@ -1,0 +1,35 @@
+<section class="list-card">
+  <div class="list-header">
+    <h2>Users</h2>
+    <span>{{ users.length }} records</span>
+  </div>
+
+  @if (loading) {
+    <p>Loading users...</p>
+  } @else if (users.length === 0) {
+    <p>No users found. Create the first one.</p>
+  } @else {
+    <div class="table">
+      <div class="row header">
+        <span>Name</span>
+        <span>Email</span>
+        <span>Status</span>
+        <span>Actions</span>
+      </div>
+
+      @for (user of users; track user.id) {
+        <div class="row">
+          <span>{{ user.name }}</span>
+          <span>{{ user.email }}</span>
+          <span class="badge" [class.inactive]="!user.active">
+            {{ user.active ? 'Active' : 'Inactive' }}
+          </span>
+          <span class="row-actions">
+            <button type="button" (click)="edit.emit(user)">Edit</button>
+            <button type="button" class="danger" (click)="remove.emit(user)">Delete</button>
+          </span>
+        </div>
+      }
+    </div>
+  }
+</section>

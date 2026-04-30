@@ -1,0 +1,11 @@
+.page-shell { max-width: 1180px; margin: 0 auto; padding: 36px 20px 56px; }
+.hero { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; padding: 34px; border-radius: 22px; margin-bottom: 22px; box-shadow: 0 16px 40px rgba(37, 99, 235, .22); }
+.eyebrow { margin: 0 0 8px; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; opacity: .85; }
+h1 { margin: 0; font-size: clamp(32px, 5vw, 54px); }
+.hero p:not(.eyebrow) { max-width: 760px; line-height: 1.6; }
+.links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+.links a { color: #172033; background: #fff; border-radius: 999px; padding: 10px 14px; text-decoration: none; font-weight: 800; }
+.error-banner { background: #fee2e2; color: #991b1b; padding: 14px 16px; border-radius: 12px; margin-bottom: 18px; font-weight: 700; }
+.grid-layout { display: grid; grid-template-columns: 360px 1fr; gap: 18px; align-items: start; }
+.stats-placeholder { margin-top: 18px; border-radius: 16px; padding: 22px; background: #fff; color: #475569; box-shadow: 0 10px 30px rgba(15, 23, 42, .08); }
+@media (max-width: 920px) { .grid-layout { grid-template-columns: 1fr; } }

@@ -1,0 +1,43 @@
+<section class="user-page">
+  <header class="page-header">
+    <div>
+      <h1>User Management</h1>
+      <p>Angular UI connected to Spring Boot REST API.</p>
+    </div>
+
+    <a [href]="apiUsersUrl" target="_blank" rel="noopener">
+      Open GET /api/users
+    </a>
+  </header>
+
+  @if (error()) {
+  <div class="error-message">
+    {{ error() }}
+  </div>
+  }
+
+  <div class="layout">
+    <app-user-form
+            [selectedUser]="selectedUser()"
+            (save)="saveUser($event)"
+            (cancelEdit)="cancelEdit()"
+    />
+
+    <app-user-list
+            [users]="users()"
+            [loading]="loading()"
+            (edit)="editUser($event)"
+            (remove)="deleteUser($event)"
+    />
+  </div>
+
+  @defer (on idle) {
+  <app-user-stats
+          [total]="totalCount()"
+          [active]="activeCount()"
+          [inactive]="inactiveCount()"
+  />
+  } @placeholder {
+  <p>Loading user stats...</p>
+  }
+</section>

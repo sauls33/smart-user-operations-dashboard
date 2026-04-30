@@ -1,0 +1,44 @@
+<form class="user-form" (ngSubmit)="submit()">
+  <h2>{{ selectedUser ? 'Edit user' : 'Create user' }}</h2>
+
+  <label>
+    Name
+    <input
+      type="text"
+      name="name"
+      [ngModel]="name()"
+      (ngModelChange)="name.set($event)"
+      placeholder="Ana Torres"
+      required
+    />
+  </label>
+
+  <label>
+    Email
+    <input
+      type="email"
+      name="email"
+      [ngModel]="email()"
+      (ngModelChange)="email.set($event)"
+      placeholder="ana@example.com"
+      required
+    />
+  </label>
+
+  <label class="checkbox-row">
+    <input
+      type="checkbox"
+      name="active"
+      [ngModel]="active()"
+      (ngModelChange)="active.set($event)"
+    />
+    Active user
+  </label>
+
+  <div class="actions">
+    <button type="submit">{{ selectedUser ? 'Update' : 'Create' }}</button>
+    @if (selectedUser) {
+      <button type="button" class="secondary" (click)="cancel()">Cancel</button>
+    }
+  </div>
+</form>

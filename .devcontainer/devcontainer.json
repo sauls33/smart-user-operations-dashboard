@@ -1,0 +1,29 @@
+{
+  "name": "Project1 Fullstack Java Angular",
+  "image": "mcr.microsoft.com/devcontainers/java:21",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "24"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-spring-boot",
+        "angular.ng-template",
+        "github.copilot",
+        "github.copilot-chat"
+      ]
+    }
+  },
+
+  "forwardPorts": [4200, 8080],
+
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y maven && cd angular/user-management-ui && npm install && cd ../../spring/user-management-api && mvn dependency:resolve",
+
+  "remoteUser": "vscode"
+}
