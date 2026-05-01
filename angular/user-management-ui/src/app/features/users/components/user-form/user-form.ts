@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User, UserFormValue } from '../../models/user.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-user-form',
@@ -8,44 +8,61 @@ import { User, UserFormValue } from '../../models/user.model';
   templateUrl: './user-form.html',
   styleUrl: './user-form.css'
 })
-export class UserForm implements OnChanges {
+export class UserForm {
+
   @Input() selectedUser: User | null = null;
-  @Output() save = new EventEmitter<UserFormValue>();
+
+  @Output() save = new EventEmitter<User>();
   @Output() cancelEdit = new EventEmitter<void>();
 
   readonly name = signal('');
   readonly email = signal('');
   readonly active = signal(true);
+  readonly role = signal('');
+  readonly department = signal('');
+  readonly lastLoginDate = signal('');
+  readonly riskLevel = signal('LOW');
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['selectedUser']) {
-      this.name.set(this.selectedUser?.name ?? '');
-      this.email.set(this.selectedUser?.email ?? '');
-      this.active.set(this.selectedUser?.active ?? true);
+  ngOnChanges() {
+    if (this.selectedUser) {
+      this.name.set(this.selectedUser.name);
+      this.email.set(this.selectedUser.email);
+      this.active.set(this.selectedUser.active);
+      this.role.set(this.selectedUser.role);
+      this.department.set(this.selectedUser.department);
+      this.lastLoginDate.set(this.selectedUser.lastLoginDate ?? '');
+      this.riskLevel.set(this.selectedUser.riskLevel);
     }
   }
 
   submit(): void {
-    const value: UserFormValue = {
-      name: this.name().trim(),
-      email: this.email().trim().toLowerCase(),
-      active: this.active()
+    const user: User = {
+      id: this.selectedUser?.id,
+      name: this.name(),
+      email: this.email(),
+      active: this.active(),
+      role: this.role(),
+      department: this.department(),
+      lastLoginDate: this.lastLoginDate(),
+      riskLevel: this.riskLevel()
     };
 
-    if (!value.name || !value.email) return;
-
-    this.save.emit(value);
-    if (!this.selectedUser) this.reset();
+    this.save.emit(user);
+    this.resetForm();
   }
 
-  cancel(): void {
-    this.reset();
-    this.cancelEdit.emit();
-  }
-
-  private reset(): void {
+  resetForm(): void {
     this.name.set('');
     this.email.set('');
     this.active.set(true);
+    this.role.set('');
+    this.department.set('');
+    this.lastLoginDate.set('');
+    this.riskLevel.set('LOW');
+  }
+
+  cancel(): void {
+    this.cancelEdit.emit();
+    this.resetForm();
   }
 }

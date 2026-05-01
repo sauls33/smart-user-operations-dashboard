@@ -10,3 +10,10 @@ h2 { margin: 0; }
 button { border: 0; border-radius: 9px; padding: 8px 10px; background: #e2e8f0; font-weight: 700; }
 button.danger { background: #fee2e2; color: #991b1b; }
 @media (max-width: 820px) { .row { grid-template-columns: 1fr; } .header { display: none; } }
+td:nth-child(6) {
+  font-weight: bold;
+}
+
+td:nth-child(6):contains("HIGH") {
+  color: red;
+}

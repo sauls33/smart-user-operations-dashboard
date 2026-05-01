@@ -1,44 +1,74 @@
-<form class="user-form" (ngSubmit)="submit()">
-  <h2>{{ selectedUser ? 'Edit user' : 'Create user' }}</h2>
+<form (ngSubmit)="submit()" class="user-form">
+
+  <input
+          type="text"
+          placeholder="Name"
+          [ngModel]="name()"
+          (ngModelChange)="name.set($event)"
+          name="name"
+          required
+  />
+
+  <input
+          type="email"
+          placeholder="Email"
+          [ngModel]="email()"
+          (ngModelChange)="email.set($event)"
+          name="email"
+          required
+  />
 
   <label>
-    Name
     <input
-      type="text"
-      name="name"
-      [ngModel]="name()"
-      (ngModelChange)="name.set($event)"
-      placeholder="Ana Torres"
-      required
+            type="checkbox"
+            [ngModel]="active()"
+            (ngModelChange)="active.set($event)"
+            name="active"
     />
+    Active
   </label>
 
-  <label>
-    Email
-    <input
-      type="email"
-      name="email"
-      [ngModel]="email()"
-      (ngModelChange)="email.set($event)"
-      placeholder="ana@example.com"
-      required
-    />
-  </label>
+  <input
+          type="text"
+          placeholder="Role (Admin, Analyst, Manager)"
+          [ngModel]="role()"
+          (ngModelChange)="role.set($event)"
+          name="role"
+          required
+  />
 
-  <label class="checkbox-row">
-    <input
-      type="checkbox"
-      name="active"
-      [ngModel]="active()"
-      (ngModelChange)="active.set($event)"
-    />
-    Active user
-  </label>
+  <input
+          type="text"
+          placeholder="Department (Engineering, Finance, Ops)"
+          [ngModel]="department()"
+          (ngModelChange)="department.set($event)"
+          name="department"
+          required
+  />
 
-  <div class="actions">
-    <button type="submit">{{ selectedUser ? 'Update' : 'Create' }}</button>
-    @if (selectedUser) {
-      <button type="button" class="secondary" (click)="cancel()">Cancel</button>
-    }
-  </div>
+  <input
+          type="date"
+          [ngModel]="lastLoginDate()"
+          (ngModelChange)="lastLoginDate.set($event)"
+          name="lastLoginDate"
+  />
+
+  <select
+          [ngModel]="riskLevel()"
+          (ngModelChange)="riskLevel.set($event)"
+          name="riskLevel"
+  >
+    <option value="LOW">LOW</option>
+    <option value="MEDIUM">MEDIUM</option>
+    <option value="HIGH">HIGH</option>
+  </select>
+
+  <button type="submit">
+    {{ selectedUser ? 'Update' : 'Create' }}
+  </button>
+
+  @if (selectedUser) {
+  <button type="button" (click)="cancel()">Cancel</button>
+  }
+
 </form>
