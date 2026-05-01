@@ -1,15 +1,12 @@
 package com.project1.usermanagementapi.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,21 +20,92 @@ public class User {
     @Column(nullable = false)
     private boolean active;
 
-    public User() {}
+    @Column(nullable = false)
+    private String role;
 
-    public User(Long id, String name, String email, boolean active) {
+    @Column(nullable = false)
+    private String department;
+
+    private LocalDate lastLoginDate;
+
+    @Column(nullable = false)
+    private String riskLevel;
+
+    public User() {
+    }
+
+    public User(Long id, String name, String email, boolean active, String role, String department, LocalDate lastLoginDate, String riskLevel) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.active = active;
+        this.role = role;
+        this.department = department;
+        this.lastLoginDate = lastLoginDate;
+        this.riskLevel = riskLevel;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public LocalDate getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public String getRiskLevel() {
+        return riskLevel;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public void setLastLoginDate(LocalDate lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public void setRiskLevel(String riskLevel) {
+        this.riskLevel = riskLevel;
+    }
 }
