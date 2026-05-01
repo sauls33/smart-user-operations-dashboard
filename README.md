@@ -1,55 +1,83 @@
-# Smart User Operations Dashboard
+Smart User Operations Dashboard
 
 AI-powered full-stack dashboard for monitoring users, operational risk, and smart activity insights.
 
-This project is part of the AI-Augmented Full-Stack Engineering training and evolves a basic CRUD application into a capstone-style product using Spring Boot, Angular, and GitHub Codespaces.
+This project evolves a CRUD application into a capstone-style product using Spring Boot, Angular, and GitHub Codespaces.
 
 ---
 
-## Product Mission
+Product Mission
 
 Smart User Operations Dashboard helps teams manage internal users, monitor operational risk, and generate intelligent recommendations based on user activity.
 
-The goal is to move beyond a simple CRUD and provide actionable insights for decision-making.
-
 ---
 
-## Tech Stack
+Tech Stack
 
-### Backend
+Backend:
 - Java 21
 - Spring Boot
-- Spring Web
 - Spring Data JPA
-- Validation
 - H2 Database
 
-### Frontend
+Frontend:
 - Angular
 - TypeScript
-- HTML / CSS
 - Angular Signals
-- Angular `@defer`
+- Angular @defer
 
-### Dev Workflow
+Workflow:
 - GitHub Codespaces
 - Dev Containers
-- GitHub CLI
 
-### AI Feature
-- Smart summary generation based on user data
-- Risk and activity analysis
-- Recommendation engine (AI-inspired logic)
+AI Feature:
+- Smart summary generation
+- Risk analysis
+- Recommendation engine
 
 ---
 
-## Repository Structure
+Run Backend
 
-```text
-smart-user-operations-dashboard/
-├── angular/
-│   └── user-management-ui/
-├── spring/
-│   └── user-management-api/
-└── .devcontainer/
-    └── devcontainer.json
+cd spring/user-management-api
+mvn spring-boot:run
+
+---
+
+Run Frontend
+
+cd angular/user-management-ui
+npm install
+npm start
+
+---
+
+API Endpoints
+
+GET    /api/users
+POST   /api/users
+PUT    /api/users/{id}
+DELETE /api/users/{id}
+
+GET    /api/ai/user-summary
+POST   /api/ai/user-summary
+
+---
+
+Demo Flow
+
+1. Start backend
+2. Start frontend
+3. Create user
+4. Edit user
+5. Delete user
+6. Generate AI summary
+
+---
+
+Capstone Value
+
+- Full-stack architecture
+- Cloud-ready environment
+- AI-inspired insights
+- Product-focused design

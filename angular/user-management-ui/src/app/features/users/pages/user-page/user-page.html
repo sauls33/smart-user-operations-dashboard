@@ -1,34 +1,50 @@
-<section class="user-page">
-  <header class="page-header">
+<section class="page-shell">
+  <header class="hero">
     <div>
-      <h1>User Management</h1>
-      <p>Angular UI connected to Spring Boot REST API.</p>
+      <p class="eyebrow">AI-Augmented Capstone</p>
+      <h1>Smart User Operations Dashboard</h1>
+      <p class="subtitle">
+        Monitor users, operational risk, activity, and AI-powered insights.
+      </p>
     </div>
 
-    <a [href]="apiUsersUrl" target="_blank" rel="noopener">
-      Open GET /api/users
+    <a class="api-link" [href]="apiUsersUrl" target="_blank" rel="noopener">
+      Open API
     </a>
   </header>
 
   @if (error()) {
-  <div class="error-message">
+  <div class="alert">
     {{ error() }}
   </div>
   }
 
-  <div class="layout">
-    <app-user-form
-            [selectedUser]="selectedUser()"
-            (save)="saveUser($event)"
-            (cancelEdit)="cancelEdit()"
-    />
+  <div class="content-grid">
+    <section class="card form-card">
+      <h2>{{ selectedUser() ? 'Edit User' : 'Create User' }}</h2>
 
-    <app-user-list
-            [users]="users()"
-            [loading]="loading()"
-            (edit)="editUser($event)"
-            (remove)="deleteUser($event)"
-    />
+      <app-user-form
+              [selectedUser]="selectedUser()"
+              (save)="saveUser($event)"
+              (cancelEdit)="cancelEdit()"
+      />
+    </section>
+
+    <section class="card table-card">
+      <div class="section-header">
+        <div>
+          <h2>User Directory</h2>
+          <p>Manage account status, role, department, and risk level.</p>
+        </div>
+      </div>
+
+      <app-user-list
+              [users]="users()"
+              [loading]="loading()"
+              (edit)="editUser($event)"
+              (remove)="deleteUser($event)"
+      />
+    </section>
   </div>
 
   @defer (on idle) {
@@ -38,27 +54,26 @@
           [inactive]="inactiveCount()"
   />
   } @placeholder {
-  <p>Loading user stats...</p>
-  }
-</section>
-<section class="ai-section">
-  <h2>AI Insights</h2>
-
-  <button (click)="generateAiSummary()" [disabled]="aiLoading()">
-    Generate AI Summary
-  </button>
-
-  @if (aiLoading()) {
-  <p>Generating summary...</p>
+  <div class="card">Loading user stats...</div>
   }
 
-  @if (aiSummary()) {
-  @defer (on idle) {
-  <div class="ai-result">
-    <p>{{ aiSummary() }}</p>
-  </div>
-  } @placeholder {
-  <p>Loading AI insights...</p>
-  }
-  }
+  <section class="card ai-section">
+    <div>
+      <p class="eyebrow">AI Magic</p>
+      <h2>Operational Insights</h2>
+      <p>
+        Generate an intelligent summary based on user activity, inactivity, and risk.
+      </p>
+    </div>
+
+    <button class="primary-button" type="button" (click)="generateAiSummary()" [disabled]="aiLoading()">
+      {{ aiLoading() ? 'Generating...' : 'Generate AI Summary' }}
+    </button>
+
+    @if (aiSummary()) {
+    <div class="ai-result">
+      {{ aiSummary() }}
+    </div>
+    }
+  </section>
 </section>

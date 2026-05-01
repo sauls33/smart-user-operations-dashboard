@@ -1,23 +1,48 @@
-<tr>
-  <th>Name</th>
-  <th>Email</th>
-  <th>Role</th>
-  <th>Department</th>
-  <th>Last Login</th>
-  <th>Risk</th>
-  <th>Actions</th>
-</tr>
+@if (loading) {
+<div class="empty-state">Loading users...</div>
+} @else if (users.length === 0) {
+<div class="empty-state">No users found.</div>
+} @else {
+<div class="table-wrapper">
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Department</th>
+      <th>Last Login</th>
+      <th>Risk</th>
+      <th>Status</th>
+      <th class="actions-column">Actions</th>
+    </tr>
+    </thead>
 
-<tr *ngFor="let user of users">
-  <td>{{ user.name }}</td>
-  <td>{{ user.email }}</td>
-  <td>{{ user.role }}</td>
-  <td>{{ user.department }}</td>
-  <td>{{ user.lastLoginDate }}</td>
-  <td>{{ user.riskLevel }}</td>
-
-  <td>
-    <button (click)="edit.emit(user)">Edit</button>
-    <button (click)="remove.emit(user)">Delete</button>
-  </td>
-</tr>
+    <tbody>
+    @for (user of users; track user.id) {
+    <tr>
+      <td class="strong">{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.department }}</td>
+      <td>{{ user.lastLoginDate || 'N/A' }}</td>
+      <td>
+              <span class="risk-badge" [class.high]="user.riskLevel === 'HIGH'" [class.medium]="user.riskLevel === 'MEDIUM'" [class.low]="user.riskLevel === 'LOW'">
+                {{ user.riskLevel }}
+              </span>
+      </td>
+      <td>
+              <span class="status-badge" [class.inactive]="!user.active">
+                {{ user.active ? 'Active' : 'Inactive' }}
+              </span>
+      </td>
+      <td class="actions">
+        <button type="button" (click)="edit.emit(user)">Edit</button>
+        <button type="button" class="danger" (click)="remove.emit(user)">Delete</button>
+      </td>
+    </tr>
+    }
+    </tbody>
+  </table>
+</div>
+}

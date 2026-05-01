@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-user-list',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css'
 })
