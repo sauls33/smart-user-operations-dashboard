@@ -51,16 +51,30 @@ public class AiUserSummaryService {
 
         String recommendation = buildRecommendation(total, inactive, highRisk, staleUsers, mostAffectedDepartment);
 
-        return String.format(
-                "Smart User Operations Insight: There are %d users. %d are active and %d are inactive. %d users are marked as HIGH risk, and %d users have not logged in for more than 30 days. Most affected department: %s. Recommendation: %s",
-                total,
-                active,
-                inactive,
-                highRisk,
-                staleUsers,
-                mostAffectedDepartment,
-                recommendation
-        );
+        return String.format("""
+📊 Overview:
+- Total users: %d
+- Active users: %d
+- Inactive users: %d
+
+⚠️ Risk Analysis:
+- High risk users: %d
+- Stale users (>30 days): %d
+
+🏢 Impact:
+- Most affected department: %s
+
+💡 Recommendation:
+- %s
+""",
+        total,
+        active,
+        inactive,
+        highRisk,
+        staleUsers,
+        mostAffectedDepartment,
+        recommendation
+);
     }
 
     private String buildRecommendation(int total, long inactive, long highRisk, long staleUsers, String mostAffectedDepartment) {
